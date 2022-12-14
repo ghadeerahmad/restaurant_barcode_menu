@@ -1,0 +1,92 @@
+*{
+    direction: rtl;
+}
+.side{
+    right: 0;
+    direction: rtl;
+    text-align: right;
+}
+.main{
+    
+    margin-right: 20%;
+    margin-left: 0;
+    direction: rtl;
+}
+.form-control{
+    text-align: right;
+}
+.form-switch .form-check-input{
+    margin-left: 0 !important;
+    margin-right: -2.5em !important;
+}
+.selectpicker{
+    direction: rtl;
+    text-align: right;
+}
+h1,h2,h3,h4,h5,h6,p,label,.mb-3,.row>*{
+    text-align: right;
+}
+.text-right{
+    text-align: left;
+}
+.text-left{
+    text-align: right;
+}
+.form-check{
+    text-align: right;
+    padding-left: 0;
+    padding-right: 1.5em;
+}
+.form-check .form-check-input{
+    float: right;
+}
+.form-check .form-check-input{
+    margin-left: 0;
+    margin-right: -1.5em;
+}
+.form-floating>label{
+    left: auto;
+    right: 0;
+    text-align: right;
+    padding-right: 0;
+}
+.form-label{
+    text-align: right;
+}
+
+@keyframes fade-in-right {
+    0% {
+    -webkit-transform: translateX(10px);
+          transform: translateX(10px);
+    opacity: 0;
+    }
+    100% {
+    -webkit-transform: translateX(0);
+          transform: translateX(0);
+    opacity: 1;
+    }
+    }
+    @media screen and (max-width:768px) {
+        .side{
+         opacity: 0;
+         z-index: -1;
+         width:50%;
+     }
+     .main{
+         margin: 0;
+     }
+    }
+   
+@keyframes slide-in{
+    100% {right:0}
+}
+@-webkit-keyframes slide-in{
+    100% {right:0}
+}
+@keyframes slide-out{
+    100% {right: -100px;}
+}
+
+@-webkit-keyframes slide-out{
+    100% {right: -100px;}
+}

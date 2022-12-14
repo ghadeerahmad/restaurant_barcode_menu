@@ -1,0 +1,30 @@
+<?php
+
+return [
+    'themes' => 'Themes',
+    'create' => 'Create New Theme',
+    'update' => 'Update Theme',
+    'name' => 'Name',
+    'background_image' => 'Background Image',
+    'primary_color' => 'Primary Color',
+    'price_back_color' => 'Price Background Color',
+    'price_font_color' => 'Price Font Color',
+    'font_color' => 'Font Color',
+    'container_back_color' => 'Container Background Color',
+    'container_color' => 'Container ForeColor',
+    'no_themes' => 'No Themes Yet',
+    'is_active' => 'Is Active',
+    'acitons' => 'Actions',
+    'save' => 'Save',
+    'actions' => 'Actions',
+    'active' => 'Active',
+    'not_active' => 'Not Active',
+    'yes' => 'Yes',
+    'no' => 'NO',
+    'store' => 'Store',
+    'is_default' => 'Is Default',
+    'default' => 'Default',
+    'not_default' => 'Not Default',
+    'secondary_color'=>'Secondary Color',
+    'intro_image'=>'Intro Image'
+];

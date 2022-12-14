@@ -1,0 +1,7 @@
+html,body{
+    direction: rtl;
+}
+.circle-image{
+    left:0;
+    right: 25%;
+}

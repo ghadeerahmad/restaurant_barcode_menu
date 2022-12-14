@@ -1,0 +1,42 @@
+#snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 999999;
+    left: 50%;
+    bottom: 30px;
+}
+#snackbar.show{
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+.input-group>.input-group-append>.btn, .input-group>.input-group-append>.input-group-text, .input-group>.input-group-prepend:first-child>.btn:not(:first-child), .input-group>.input-group-prepend:first-child>.input-group-text:not(:first-child), .input-group>.input-group-prepend:not(:first-child)>.btn, .input-group>.input-group-prepend:not(:first-child)>.input-group-text{
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.input-group>.custom-select:not(:last-child), .input-group>.form-control:not(:last-child){
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.side{
+    overflow-y: scroll;
+}
+.side::-webkit-scrollbar{
+  width: 10px;
+}
+.side::-webkit-scrollbar-thumb{
+  background-color: #494947;
+  border-radius: 10px;
+  transition: .5s all ease-in-out;
+}
+.side::-webkit-scrollbar-thumb:hover{
+  background-color: #252524;
+}

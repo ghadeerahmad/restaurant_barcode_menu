@@ -1,0 +1,33 @@
+<?php
+
+return [
+    'stores'=>'المتاجر',
+    'add'=>'إنشاء متجر',
+    'update'=>'تعديل',
+    'delete'=>'حذف',
+    'name'=>'اسم المتجر',
+    'description'=>'وصف المتجر',
+    'created_at'=>'تاريخ الانشاء',
+    'is_branch'=>'فرع',
+    'yes'=>'نعم',
+    'no'=>'لا',
+    'is_active'=>'نشط',
+    'active'=>'نشط',
+    'disabled'=>'معطل',
+    'enabled'=>'تفعيل',
+    'no_stores'=>'لايوجد متاجر',
+    'parent'=>'المتأجر الأب',
+    'actions'=>'إجراءات',
+    'name_ar'=>'الاسم بالعربية',
+    'name_en'=>'الاسم بالانكليزية',
+    'delete_confirm'=>"هل أنت متأكد من رغبتك بحذف المتجر وجميع منتجاته وتصنيفاته؟",
+    'product_count'=>'عدد المنتجات',
+    'category_count'=>'عدد التصنيفات',
+    'waiting_approv'=>'بانتظار الموافقة',
+    'disabled_by_owner'=>'تم التعطيل من قبل مدير الموقع',
+    'status'=>'الحالة',
+    'products_count'=>'عدد المنتجات',
+    'categories_count'=>'عدد التصنيفات',
+    'orders_count'=>'عدد الطلبات',
+    'phone'=>'رقم الهاتف'
+];
