@@ -27,7 +27,6 @@ class CartController extends Controller
     {
         if (session('store_id') == null) return abort(404);
         $id = session('store_id');
-        get_locale();
         $data = array();
         if (Auth::check()) {
             $key = Cookie::get('cart-key');
@@ -347,7 +346,7 @@ class CartController extends Controller
     {
         get_locale();
         $item = Cart::find($id);
-        if($item == null) return back();
+        if ($item == null) return back();
         if (Auth::check()) {
             $key = Cookie::get('cart-key');
             $result = false;
@@ -361,7 +360,7 @@ class CartController extends Controller
         CartAddon::where('cart_id', $item->id)->delete();
         CartEdit::where('cart_id', $item->id)->delete();
         CartSauce::where('cart_id', $item->id)->delete();
-        CartSize::where('cart_id',$item->id)->delete();
+        CartSize::where('cart_id', $item->id)->delete();
         $item->delete();
         return back()->with(['success' => __('messages.delete_success')]);
     }

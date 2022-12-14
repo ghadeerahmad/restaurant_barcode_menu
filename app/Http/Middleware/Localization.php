@@ -16,6 +16,7 @@ class Localization
      */
     public function handle(Request $request, Closure $next)
     {
+        get_locale();
         return $next($request);
     }
 }

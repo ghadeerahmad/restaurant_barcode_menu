@@ -26,7 +26,7 @@ class UsersController extends Controller
         $data['password'] = Hash::make($request['password']);
         $user = User::create($data);
         if ($user) {
-            return back()->with(['success'=>__('messages.user_create_success')]);
+            return back()->with(['success' => __('messages.user_create_success')]);
         }
     }
     public function loginPage()
@@ -49,7 +49,6 @@ class UsersController extends Controller
     public function logout()
     {
         Auth::logout();
-        //session(['store_id'=>null]);
         return redirect('/');
     }
 }

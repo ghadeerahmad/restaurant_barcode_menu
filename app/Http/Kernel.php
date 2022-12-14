@@ -37,6 +37,7 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
+            'localization',
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
@@ -70,12 +71,14 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'admin'=>AdminRole::class,
-        'approved'=>ApprovedRole::class,
-        'siteRole'=>SiteRoles::class,
-        'storeRole'=>StoreRole::class,
-        'check_sub'=>CheckSub::class,
-        'planRole'=>PlanRole::class,
-        'storeStatus'=>StoreStatus::class
+        'localization' => \App\Middleware\Localization::class,
+        'admin' => AdminRole::class,
+        'approved' => ApprovedRole::class,
+        'siteRole' => SiteRoles::class,
+        'storeRole' => StoreRole::class,
+        'check_sub' => CheckSub::class,
+        'planRole' => PlanRole::class,
+        'storeStatus' => StoreStatus::class,
+
     ];
 }
