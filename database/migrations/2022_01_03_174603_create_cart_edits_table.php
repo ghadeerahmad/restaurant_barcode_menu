@@ -13,11 +13,12 @@ class CreateCartEditsTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('cart_edits', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('cart_id');
-            $table->foreignId('product_id');
-            $table->foreignId('edit_id');
+            $table->foreignId('cart_id')->constrained('carts')->cascadeOnDelete();
+            $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
+            $table->foreignId('edit_id')->constrained('edits')->cascadeOnDelete();
             $table->timestamps();
         });
     }

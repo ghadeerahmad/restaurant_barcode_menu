@@ -13,11 +13,12 @@ class CreateOrderSizesTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('order_sizes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id');
-            $table->foreignId('product_id');
-            $table->foreignId('size_id');
+            $table->foreignId('order_id')->constrained('orders')->cascadeOnDelete();
+            $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
+            $table->foreignId('size_id')->constrained('sizes')->cascadeOnDelete();
             $table->timestamps();
         });
     }

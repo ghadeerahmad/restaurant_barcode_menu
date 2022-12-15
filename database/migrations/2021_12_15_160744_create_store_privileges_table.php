@@ -17,7 +17,7 @@ class CreateStorePrivilegesTable extends Migration
             $table->id();
             $table->string('name_ar');
             $table->string('name_en');
-            $table->tinyInteger('is_default')->default(0);
+            $table->boolean('is_default')->default(0);
             $table->timestamps();
         });
     }

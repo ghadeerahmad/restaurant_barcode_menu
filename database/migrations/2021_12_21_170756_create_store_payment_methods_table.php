@@ -13,16 +13,17 @@ class CreateStorePaymentMethodsTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('store_payment_methods', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('store_id');
+            $table->foreignId('store_id')->constrained('stores')->cascadeOnDelete();
             $table->string('title_ar')->nullable();
             $table->string('title_en')->nullable();
             $table->string('description_ar')->nullable();
             $table->string('description_en')->nullable();
             $table->string('image')->nullable();
             $table->string('account_number')->nullable();
-            $table->tinyInteger('is_active')->default(1);
+            $table->boolean('is_active')->default(1);
             $table->timestamps();
         });
     }

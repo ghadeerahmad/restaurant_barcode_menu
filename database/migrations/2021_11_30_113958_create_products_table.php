@@ -13,24 +13,25 @@ class CreateProductsTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name_ar')->nullable();
             $table->string('name_en')->nullable();
             $table->double('price');
             $table->double('discount')->nullable();
-            $table->enum('discount_type',['PERCENT','AMOUNT'])->default('AMOUNT');
-            $table->foreignId('store_id');
-            $table->foreignId('product_category_id');
-            $table->tinyInteger('is_active')->default(1);
-            $table->tinyInteger('is_recommended')->default(1);
+            $table->enum('discount_type', ['PERCENT', 'AMOUNT'])->default('AMOUNT');
+            $table->foreignId('store_id')->constrained('stores')->cascadeOnDelete();
+            $table->foreignId('product_category_id')->constrained('product_categories')->cascadeOnDelete();
+            $table->boolean('is_active')->default(1);
+            $table->boolean('is_recommended')->default(1);
             $table->text('description_ar')->nullable();
             $table->text('description_en')->nullable();
             $table->double('cooking_time');
             $table->string('image')->nullable();
             $table->string('size')->nullable();
             $table->double('tax')->nullable();
-            $table->enum('tax_type',['PERCENT','AMOUNT'])->default('AMOUNT');
+            $table->enum('tax_type', ['PERCENT', 'AMOUNT'])->default('AMOUNT');
             $table->timestamps();
         });
     }

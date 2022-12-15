@@ -13,11 +13,12 @@ class CreateOrderSaucesTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('order_sauces', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id');
-            $table->foreignId('product_id');
-            $table->foreignId('sauce_id');
+            $table->foreignId('order_id')->constrained('orders')->cascadeOnDelete();
+            $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
+            $table->foreignId('sauce_id')->constrained('sauces')->cascadeOnDelete();
             $table->timestamps();
         });
     }

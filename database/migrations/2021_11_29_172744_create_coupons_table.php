@@ -13,6 +13,7 @@ class CreateCouponsTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('coupons', function (Blueprint $table) {
             $table->id();
             $table->string('name_ar')->nullable();
@@ -20,10 +21,10 @@ class CreateCouponsTable extends Migration
             $table->text('description_ar')->nullable();
             $table->text('description_en')->nullable();
             $table->string('code');
-            $table->enum('type',['AMOUNT','PERCENT'])->default('PERCENT');
+            $table->enum('type', ['AMOUNT', 'PERCENT'])->default('PERCENT');
             $table->double('discount');
-            $table->tinyInteger('is_active')->default(1);
-            $table->foreignId('store_id');
+            $table->boolean('is_active')->default(1);
+            $table->foreignId('store_id')->constrained('stores')->cascadeOnDelete();
             $table->timestamps();
         });
     }

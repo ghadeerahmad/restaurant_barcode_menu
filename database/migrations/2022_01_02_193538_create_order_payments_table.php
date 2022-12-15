@@ -13,9 +13,10 @@ class CreateOrderPaymentsTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('order_payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id');
+            $table->foreignId('order_id')->constrained('orders')->cascadeOnDelete();
             $table->string('payment_method');
             $table->string('image')->nullable();
             $table->string('payment_number')->nullable();

@@ -13,10 +13,11 @@ class CreateStoreAdminsTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('store_admins', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('store_id');
-            $table->foreignId('user_id');
+            $table->foreignId('store_id')->constrained('stores')->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->timestamps();
         });
     }

@@ -13,12 +13,13 @@ class CreateSaucesTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('sauces', function (Blueprint $table) {
             $table->id();
             $table->string('name_ar')->nullable();
             $table->string('name_en')->nullable();
             $table->double('price');
-            $table->foreignId('store_id');
+            $table->foreignId('store_id')->constrained('stores')->cascadeOnDelete();
             $table->timestamps();
         });
     }

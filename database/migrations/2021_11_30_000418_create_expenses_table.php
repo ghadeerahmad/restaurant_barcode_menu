@@ -13,6 +13,7 @@ class CreateExpensesTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('expenses', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -20,7 +21,7 @@ class CreateExpensesTable extends Migration
             $table->string('date');
             $table->string('image')->nullable();
             $table->longText('note')->nullable();
-            $table->foreignId('store_id');
+            $table->foreignId('store_id')->constrained('stores')->cascadeOnDelete();
             $table->timestamps();
         });
     }

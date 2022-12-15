@@ -13,10 +13,11 @@ class CreateStorePrivilegeRolesTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('store_privilege_roles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('store_privilege_id');
-            $table->foreignId('store_role_id');
+            $table->foreignId('store_privilege_id')->constrained('store_privileges')->cascadeOnDelete();
+            $table->foreignId('store_role_id')->constrained('store_roles')->cascadeOnDelete();
             $table->timestamps();
         });
     }

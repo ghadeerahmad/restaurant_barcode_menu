@@ -16,7 +16,8 @@ class CreateThemesTable extends Migration
         Schema::create('themes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('store_id')->nullable();
+            $table->foreignId('store_id')->nullable()->constrained('stores')->cascadeOnDelete();
+            $table->boolean('is_default')->default(0);
             $table->string('information_class_background')->nullable();
             $table->string('information_class_color')->nullable();
             $table->string('info_product_class_background')->nullable();

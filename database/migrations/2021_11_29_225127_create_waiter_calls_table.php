@@ -13,12 +13,13 @@ class CreateWaiterCallsTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('waiter_calls', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('table_id');
+            $table->foreignId('table_id')->constrained('tables')->cascadeOnDelete();
+            $table->foreignId('store_id')->constrained('stores')->cascadeOnDelete();
             $table->string('comment')->nullable();
-            $table->foreignId('store_id');
-            $table->tinyInteger('is_completed')->default(0);
+            $table->boolean('is_completed')->default(0);
             $table->timestamps();
         });
     }

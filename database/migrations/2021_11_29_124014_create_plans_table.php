@@ -13,6 +13,7 @@ class CreatePlansTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('plans', function (Blueprint $table) {
             $table->id();
             $table->string('name_ar');
@@ -20,11 +21,11 @@ class CreatePlansTable extends Migration
             $table->text('description_ar');
             $table->text('description_en');
             $table->double('price');
-            $table->foreignId('currency_id');
-            $table->enum('sub_type',['MONTH',"YEAR"])->default('MONTH');
+            $table->foreignId('currency_id')->constrained('currencies')->nullOnDelete();
+            $table->enum('sub_type', ['MONTH', "YEAR"])->default('MONTH');
             $table->integer('period');
             $table->integer('max_branches');
-            $table->tinyInteger('is_default');
+            $table->boolean('is_default');
             $table->timestamps();
         });
     }

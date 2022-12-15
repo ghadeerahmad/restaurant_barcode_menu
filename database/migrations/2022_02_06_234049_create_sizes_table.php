@@ -13,12 +13,13 @@ class CreateSizesTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('sizes', function (Blueprint $table) {
             $table->id();
             $table->string('name_ar');
             $table->string('name_en');
             $table->double('price');
-            $table->foreignId('store_id');
+            $table->foreignId('store_id')->constrained('stores')->cascadeOnDelete();
             $table->timestamps();
         });
     }

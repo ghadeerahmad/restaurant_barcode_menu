@@ -13,10 +13,11 @@ class CreatePlanRolesTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('plan_roles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('plan_id');
-            $table->foreignId('role_id');
+            $table->foreignId('plan_id')->constrained('plans')->cascadeOnDelete();
+            $table->foreignId('role_id')->constrained('roles')->cascadeOnDelete();
             $table->timestamps();
         });
     }

@@ -13,11 +13,12 @@ class CreateUserStorePrivilegesTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('user_store_privileges', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('store_privilege_id');
-            $table->foreignId('user_id');
-            $table->foreignId('store_id');
+            $table->foreignId('store_privilege_id')->constrained('store_privileges')->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('store_id')->constrained('stores')->cascadeOnDelete();
             $table->timestamps();
         });
     }

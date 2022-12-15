@@ -13,9 +13,10 @@ class CreateWorkDaysTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('work_days', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('store_id');
+            $table->foreignId('store_id')->constrained('stores')->cascadeOnDelete();
             $table->string('day');
             $table->string('opening_time')->nullable();
             $table->string('closing_time')->nullable();

@@ -13,14 +13,15 @@ class CreateCartsTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id');
-            $table->foreignId('user_id')->nullable();
+            $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('store_id')->constrained('stores')->cascadeOnDelete();
+            $table->foreignId('table_id')->nullable()->constrained('tables')->nullOnDelete();
             $table->string('key')->nullable();
             $table->integer('quantity');
-            $table->foreignId('store_id');
-            $table->foreignId('table_id')->nullable();
             $table->timestamps();
         });
     }

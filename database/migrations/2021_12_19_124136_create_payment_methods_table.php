@@ -21,7 +21,7 @@ class CreatePaymentMethodsTable extends Migration
             $table->string('description_en')->nullable();
             $table->string('image')->nullable();
             $table->string('account_number')->nullable();
-            $table->tinyInteger('is_active')->default(1);
+            $table->boolean('is_active')->default(1);
             $table->timestamps();
         });
     }

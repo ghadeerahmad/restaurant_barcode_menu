@@ -13,11 +13,12 @@ class CreateCartAddonsTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('cart_addons', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('cart_id');
-            $table->foreignId('product_id');
-            $table->foreignId('addon_id');
+            $table->foreignId('cart_id')->constrained('carts')->cascadeOnDelete();
+            $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
+            $table->foreignId('addon_id')->constrained('addons')->cascadeOnDelete();
             $table->timestamps();
         });
     }

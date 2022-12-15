@@ -13,11 +13,12 @@ class CreateCartSaucesTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('cart_sauces', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('cart_id');
-            $table->foreignId('product_id');
-            $table->foreignId('sauce_id');
+            $table->foreignId('cart_id')->constrained('carts')->cascadeOnDelete();
+            $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
+            $table->foreignId('sauce_id')->constrained('sauces')->cascadeOnDelete();
             $table->timestamps();
         });
     }

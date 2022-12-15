@@ -19,7 +19,7 @@ class CreateQuestionsTable extends Migration
             $table->string('question_en');
             $table->text('answer_ar');
             $table->text('answer_en');
-            $table->tinyInteger('is_active')->default(1);
+            $table->boolean('is_active')->default(1);
             $table->timestamps();
         });
     }

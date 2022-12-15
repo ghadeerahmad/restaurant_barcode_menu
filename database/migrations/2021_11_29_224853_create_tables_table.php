@@ -13,11 +13,12 @@ class CreateTablesTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('tables', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('store_id');
-            $table->tinyInteger('is_active')->default(1);
+            $table->foreignId('store_id')->constrained('stores')->cascadeOnDelete();
+            $table->boolean('is_active')->default(1);
             $table->string('code')->nullable();
             $table->timestamps();
         });

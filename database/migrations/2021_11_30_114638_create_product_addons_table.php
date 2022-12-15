@@ -13,11 +13,12 @@ class CreateProductAddonsTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('product_addons', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('addon_id');
-            $table->foreignId('product_id');
-            $table->foreignId('store_id');
+            $table->foreignId('addon_id')->constrained('addons')->cascadeOnDelete();
+            $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
+            $table->foreignId('store_id')->constrained('stores')->cascadeOnDelete();
             $table->timestamps();
         });
     }

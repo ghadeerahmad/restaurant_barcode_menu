@@ -13,12 +13,13 @@ class CreatePlanOrdersTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('plan_orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->foreignId('plan_id');
-            $table->foreignId('store_id');
-            $table->foreignId('payment_method_id');
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('plan_id')->constrained('plans')->cascadeOnDelete();
+            $table->foreignId('store_id')->constrained('stores')->cascadeOnDelete();
+            $table->foreignId('payment_method_id')->constrained()->cascadeOnDelete();
             $table->tinyInteger('status')->default(0);
             $table->string('image')->nullable();
             $table->string('payment_number')->nullable();

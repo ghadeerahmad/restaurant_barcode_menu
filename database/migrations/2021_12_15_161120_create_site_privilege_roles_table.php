@@ -13,10 +13,11 @@ class CreateSitePrivilegeRolesTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('site_privilege_roles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('site_privilege_id');
-            $table->foreignId('site_role_id');
+            $table->foreignId('site_privilege_id')->constrained('site_privileges')->cascadeOnDelete();
+            $table->foreignId('site_role_id')->constrained('site_roles')->cascadeOnDelete();
             $table->timestamps();
         });
     }

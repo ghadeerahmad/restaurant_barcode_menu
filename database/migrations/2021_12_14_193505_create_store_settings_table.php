@@ -13,9 +13,10 @@ class CreateStoreSettingsTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('store_settings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('store_id');
+            $table->foreignId('store_id')->constrained('stores')->cascadeOnDelete();
             $table->string('primary_color')->nullable();
             $table->string('secondary_color')->nullable();
             $table->string('text_color')->nullable();
@@ -23,6 +24,9 @@ class CreateStoreSettingsTable extends Migration
             $table->string('fav_icon')->nullable();
             $table->string('googleApiKey')->nullable();
             $table->string('paypalApiKey')->nullable();
+            $table->boolean('is_delivery_enabled')->nullable();
+            $table->boolean('is_cash_enabled')->nullable();
+            $table->boolean('other_payment_enabled')->nullable();
             $table->timestamps();
         });
     }
