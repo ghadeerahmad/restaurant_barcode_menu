@@ -71,7 +71,7 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'localization' => \App\Middleware\Localization::class,
+        'localization' => \App\Http\Middleware\Localization::class,
         'admin' => AdminRole::class,
         'approved' => ApprovedRole::class,
         'siteRole' => SiteRoles::class,
