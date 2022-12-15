@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Order;
 use App\Models\Plan;
 use App\Models\Setting;
 use App\Models\Store;
@@ -304,5 +305,16 @@ if (!function_exists('get_time_string')) {
             $string = $hours . ':' . $minutes . ' ' . $am_pm;
             return $string;
         }
+    }
+}
+if (!function_exists('generate_order_id')) {
+    function generate_order_id()
+    {
+        $today = date('Ymd');
+        $ids = Order::where('order_unique_id', 'like', $today . '%')->pluck('order_unique_id');
+        do {
+            $id = $today . rand(10000, 9999);
+        } while ($ids->contains($id));
+        return $id;
     }
 }

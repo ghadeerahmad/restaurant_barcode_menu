@@ -34,9 +34,6 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $data = array();
-        if (Auth::check()) {
-        }
     }
 
     /**
@@ -47,7 +44,6 @@ class OrderController extends Controller
     public function create(Store $store)
     {
         if (!calc_work_day()) return abort(404);
-        get_locale();
         $local = App::currentLocale();
         if ($store->status != 1) return redirect('cart');
         $payment_methods = StorePaymentMethod::where('store_id', $store->id)->get();
@@ -81,7 +77,6 @@ class OrderController extends Controller
     public function table_create(Store $store)
     {
         if (session('table') == null) return abort(404);
-        get_locale();
         if ($store->status != 1) return redirect('cart');
         $payment_methods = StorePaymentMethod::where('store_id', $store->id)->get();
         $key = Cookie::get('cart-key');
@@ -111,7 +106,6 @@ class OrderController extends Controller
      */
     public function store(Request $request, $id)
     {
-        get_locale();
         request()->validate([
             'customer_name' => 'required',
             'customer_phone' => 'required',
@@ -209,13 +203,8 @@ class OrderController extends Controller
             }
         }
         $data['total'] = $total;
-        $unique_id = random_int(100000, 999999999);
-        while (true) {
-            $order = Order::where('order_unique_id', $unique_id)->first();
-            if ($order == null) break;
-            $unique_id = random_int(0, 30);
-        }
-        $data['order_unique_id'] = $unique_id;
+
+        $data['order_unique_id'] = generate_order_id();
         if ($request['payment_method'] == "CASH") $data['payment_type'] = 'CASH';
 
         $order = Order::create($data);
@@ -403,18 +392,10 @@ class OrderController extends Controller
             }
         }
         $data['is_delivery_enabled'] = 0;
-        // $waiter_call_enabled = 0;
-        // if($request['waiter_call'] == 1)  $waiter_call_enabled=1;
-        // $data['call_waiter_enabled'] = $waiter_call_enabled;
         $total += $tax;
         $data['total'] = $total;
-        $unique_id = random_int(100000, 999999999);
-        while (true) {
-            $order = Order::where('order_unique_id', $unique_id)->first();
-            if ($order == null) break;
-            $unique_id = random_int(0, 30);
-        }
-        $data['order_unique_id'] = $unique_id;
+
+        $data['order_unique_id'] = generate_order_id();
 
         $order = Order::create($data);
         if ($order) {
@@ -490,7 +471,7 @@ class OrderController extends Controller
                 CartAddon::where('cart_id', $item->id)->delete();
                 CartEdit::where('cart_id', $item->id)->delete();
                 CartSauce::where('cart_id', $item->id)->delete();
-                CartSize::where('cart_id',$item->id)->delete();
+                CartSize::where('cart_id', $item->id)->delete();
             }
             if (Auth::check()) {
                 if ($cart == null) $cart = Cart::with(['product'])
@@ -503,7 +484,7 @@ class OrderController extends Controller
 
             if ($store->phone != null) {
                 $message = send_whatsapp_message($order);
-                return redirect()->away('https://api.whatsapp.com/send?phone=' . $store->country_code->code.$store->phone . '&text=' . $message);
+                return redirect()->away('https://api.whatsapp.com/send?phone=' . $store->country_code->code . $store->phone . '&text=' . $message);
             }
             //return redirect('cart');
             return redirect('store/' . $id . '/table/' . $table_id);
