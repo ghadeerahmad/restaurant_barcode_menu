@@ -14,8 +14,7 @@ class StoreRoleSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('store_roles')->truncate();
-        DB::table('store_roles')->insert([
+        DB::table('store_roles')->upsert([
             0 => [
                 'name' => 'update Store',
                 'code' => 'update_store',
@@ -199,7 +198,7 @@ class StoreRoleSeeder extends Seeder
                 'code' => 'modify_plan',
                 'group' => 'Subscription Plans'
             ],
-            
+
             45 => [
                 'name' => 'view users',
                 'code' => 'view_user',
@@ -240,6 +239,6 @@ class StoreRoleSeeder extends Seeder
                 'code' => 'delete_theme',
                 'group' => 'Themes'
             ],
-        ]);
+        ], ['code']);
     }
 }
