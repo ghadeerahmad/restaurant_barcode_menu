@@ -45,7 +45,6 @@ class ProductsController extends Controller
     }
     public function edit($id)
     {
-        get_locale();
         $store_id = get_current_store();
         $store = Store::with(['product_categories', 'currency', 'addons', 'edits', 'sauces', 'sizes'])->find($store_id);
         $cates = $store->product_categories;
@@ -69,7 +68,6 @@ class ProductsController extends Controller
      */
     public function create(Request $request)
     {
-        get_locale();
         $store = Store::find(get_current_store());
         request()->validate([
             'name_ar' => 'nullable|max:50',
@@ -77,7 +75,7 @@ class ProductsController extends Controller
             'price' => 'required',
             'product_category_id' => 'required',
             'is_active' => 'required',
-            'is_recommended' => 'required',
+            'is_recommended' => 'nullable',
             'description_ar' => 'nullable|max:255',
             'description_en' => 'nullable|max:255',
             'cooking_time' => 'required',
@@ -113,11 +111,11 @@ class ProductsController extends Controller
             'price' => $request['price'],
             'product_category_id' => $request['product_category_id'],
             'is_active' => $request['is_active'],
-            'is_recommended' => $request['is_recommended'],
             'cooking_time' => $request['cooking_time'],
             'store_id' => $store->id,
             'image' => $request['image']
         ];
+        if (isset($request['is_recommended'])) $data['is_recommended'] = $request['is_recommended'];
         if (isset($request['tax'])) $data['tax'] = $request['tax'];
         if (isset($request['tax_type'])) $data['tax_type'] = $request['tax_type'];
         if (!empty($request['name_ar'])) $data['name_ar'] = $request['name_ar'];
