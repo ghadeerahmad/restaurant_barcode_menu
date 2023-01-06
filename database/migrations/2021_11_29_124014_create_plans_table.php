@@ -21,7 +21,7 @@ class CreatePlansTable extends Migration
             $table->text('description_ar');
             $table->text('description_en');
             $table->double('price');
-            $table->foreignId('currency_id')->constrained('currencies')->nullOnDelete();
+            $table->foreignId('currency_id')->nullable()->constrained('currencies')->nullOnDelete();
             $table->enum('sub_type', ['MONTH', "YEAR"])->default('MONTH');
             $table->integer('period');
             $table->integer('max_branches');
