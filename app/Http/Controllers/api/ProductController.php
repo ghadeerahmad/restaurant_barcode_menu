@@ -15,10 +15,10 @@ class ProductController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $request->validate(['category' => 'nullable|exists:store_categories,id']);
+        $request->validate(['category' => 'nullable|exists:product_categories,id']);
         $query = Product::query();
         if ($request['category']) {
-            $query = $query->where('store_category_id', $request['category']);
+            $query = $query->where('product_category_id', $request['category']);
         }
         $result = $query->get();
         return success_response($result);
