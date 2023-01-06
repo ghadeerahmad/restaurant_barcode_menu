@@ -20,9 +20,7 @@ class StoreController extends Controller
      */
     public function index($id)
     {
-        //dd(date('D'));
-        get_locale();
-        //dd($locale);
+
         $store = Store::where('status', 1)
             ->where('id', $id)->first();
         if ($store == null) return abort(404);
@@ -31,8 +29,8 @@ class StoreController extends Controller
             ->where('store_id', $id)->get();
         $key = Cookie::get('cart-key');
         $cart = null;
-        if($key != null){
-            $cart = Cart::with(['product','addons','sauces'])->where('key',$key)->get();
+        if ($key != null) {
+            $cart = Cart::with(['product', 'addons', 'sauces'])->where('key', $key)->get();
         }
         return view('visitors.menu.index', [
             'store' => $store,
@@ -50,7 +48,7 @@ class StoreController extends Controller
         // $minutes = 26 * 60000000;
         // $closing_milliseconds = $hours + $minutes;
         // $h = date('H');
-        
+
         // dd([$h*360000000,$hours]);
         get_locale();
         $store = Store::find($id);

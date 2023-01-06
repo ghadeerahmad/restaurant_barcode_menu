@@ -8,72 +8,99 @@ use Illuminate\Database\Eloquent\Model;
 class Store extends Model
 {
     use HasFactory;
-    protected $guarded=[];
-    public function users(){
+    protected $guarded = [];
+
+    public function scopeAccepted($query)
+    {
+        return $query->where('status', 1);
+    }
+    public function users()
+    {
         return $this->hasMany(UserStorePrivilege::class);
     }
-    public function branches(){
-        return $this->hasMany(Store::class,'parent_id','id');
+    public function branches()
+    {
+        return $this->hasMany(Store::class, 'parent_id', 'id');
     }
-    public function product_categories(){
+    public function product_categories()
+    {
         return $this->hasMany(ProductCategory::class);
     }
-    public function products(){
+    public function products()
+    {
         return $this->hasMany(Product::class);
     }
-    public function addonCategories(){
+    public function addonCategories()
+    {
         return $this->hasMany(AddonCategory::class);
     }
-    public function addons(){
+    public function addons()
+    {
         return $this->hasMany(Addon::class);
     }
-    public function addonCategoryItems(){
+    public function addonCategoryItems()
+    {
         return $this->hasMany(AddonCategoryItem::class);
     }
-    public function edits(){
+    public function edits()
+    {
         return $this->hasMany(Edit::class);
     }
-    public function sauces(){
+    public function sauces()
+    {
         return $this->hasMany(Sauce::class);
     }
-    public function sizes(){
+    public function sizes()
+    {
         return $this->hasMany(Size::class);
     }
-    public function tables(){
+    public function tables()
+    {
         return $this->hasMany(Table::class);
     }
-    public function plan(){
+    public function plan()
+    {
         return $this->belongsTo(Plan::class);
     }
-    public function currency(){
+    public function currency()
+    {
         return $this->belongsTo(Currency::class);
     }
-    public function hasBranches(){
-        if($this->max_branches > 0) return true;
+    public function hasBranches()
+    {
+        if ($this->max_branches > 0) return true;
         return false;
     }
-    public function parent(){
-        return $this->belongsTo(Store::class,'parent_id','id');
+    public function parent()
+    {
+        return $this->belongsTo(Store::class, 'parent_id', 'id');
     }
-    public function setting(){
+    public function setting()
+    {
         return $this->hasOne(StoreSetting::class);
     }
-    public function store_invites(){
+    public function store_invites()
+    {
         return $this->hasMany(StoreInvite::class);
     }
-    public function orders(){
+    public function orders()
+    {
         return $this->hasMany(Order::class);
     }
-    public function expenses(){
+    public function expenses()
+    {
         return $this->hasMany(Expense::class);
     }
-    public function themes(){
+    public function themes()
+    {
         return $this->hasMany(Theme::class);
     }
-    public function work_days(){
+    public function work_days()
+    {
         return $this->hasMany(WorkDay::class);
     }
-    public function country_code(){
+    public function country_code()
+    {
         return $this->belongsTo(CountryCode::class);
     }
 }
